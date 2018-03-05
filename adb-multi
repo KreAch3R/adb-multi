@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 0.9
+# Version: 0.95
 
 # Variables for color output
 green=`tput setaf 2`
@@ -25,7 +25,7 @@ reset=`tput sgr0`
 
 # Check for zero arguments and abort
 if [ $# -eq 0 ]; then
-    echo "${red}Illegal number of parameters!${reset}"
+    echo "${red}You need to specify at least an adb device id or 'generate' to continue.${reset}"
     exit 1
 fi
 
@@ -39,7 +39,8 @@ elif [ "$1" == "generate" ]; then
             # the problem is that adb reads from stdin by default, so you need /dev/null so that it doesn't
             # consume the rest of the loop. Read https://stackoverflow.com/a/13800476/4008886
             device=$(adb -s $id shell getprop ro.product.device </dev/null)
-            #filename=$(printf '%s\n' "${model//$manufacturer/}" | sed 's/ //g')
+
+            # lowercase filename, remove spaces
             filename=$(echo adb-${device,,} | sed 's/ //g')
             echo "${yellow}Installing $filename...${reset}"
             cat <<EOT > ~/bin/$filename
@@ -65,9 +66,13 @@ fi
 # shift passed arguments one place right
 shift 1
 
+# Grab device info from getprop
 model=$(adb -s $id shell getprop ro.product.model)
 manufacturer=$(adb -s $id shell getprop ro.product.manufacturer)
+# Strip duplicated manufacturer inside model
+strippedmodel=$(printf '%s\n' "${model//$manufacturer/}" | sed 's/ //g')
 
-echo "Connected to ${green}$manufacturer $model!${reset}"
+echo "Connected to ${green}$manufacturer $strippedmodel!${reset}"
 
+# Pipe all the commands to adb
 adb -s $id $@
