@@ -70,8 +70,9 @@ shift 1
 model=$(adb -s $id shell getprop ro.product.model)
 manufacturer=$(adb -s $id shell getprop ro.product.manufacturer)
 # Strip duplicated manufacturer inside model
-strippedmodel=$(printf '%s\n' "${model//$manufacturer/}" | sed 's/ //g')
-
+shopt -s nocasematch
+strippedmodel=$(echo ${model//${manufacturer}/})
+shopt -u nocasematch
 echo "Connected to ${green}$manufacturer $strippedmodel!${reset}"
 
 # Pipe all the commands to adb
