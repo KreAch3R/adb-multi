@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 0.99
+# Version: 1.00
 
 # Variables for color output
 green=`tput setaf 2`
@@ -67,6 +67,13 @@ fi
 
 # shift passed arguments one place right
 shift 1
+
+# check if device is connected
+adb -s $id shell echo "connection test" >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo  "${red}The selected device is NOT connected!${reset}"
+    exit 1
+fi
 
 # Grab device info from getprop
 model=$(adb -s $id shell getprop ro.product.model | tr -d '\r')
