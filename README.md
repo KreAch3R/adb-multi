@@ -36,10 +36,11 @@ If run with `generate` as the argument, the script will find your currently conn
 
 Current scripts:
    * **adb-$FILENAME**: standard ADB wrapper, with current device info. Expect everything to work as it should (everything is piped through).   
-   * **adb-$FILENAME-push**: automates one of the most usual `adb push` commands, inside */sdcard*:
+   * **adb-$FILENAME-push**: automates one of the most usual `adb push` commands, and pushes the file to a specified *$ADBDESTDIR* directory (script variable). Default is `/sdcard`:
       ```
       adb push $FILE /sdcard
       ```
+  * **adb-$FILENAME-screenshot**: grabs a screenshot from the device using the `screencap` utility and saves it into the development's machine *$SCREENDIR* folder (script variable).
 
 ## Installation
 
