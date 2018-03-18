@@ -41,6 +41,7 @@ Current scripts:
       adb push $FILE /sdcard
       ```
   * **adb-$FILENAME-screenshot**: grabs a screenshot from the device using the `screencap` utility and saves it into the development's machine *$SCREENDIR* folder (script variable).
+  * **adb-$FILENAME-activity**: finds out the current activity path shown on the device
 
 ## Installation
 
