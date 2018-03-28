@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 1.2
+# Version: 1.3
 
 # Variables for color output
 green=`tput setaf 2`
@@ -41,7 +41,8 @@ if [ "$1" ] && [ "$1" != "generate" ]; then
 elif [ "$1" == "generate" ]; then
     adb devices | while read line; do
         if [ ! "$line" = "" ] && ([ `echo $line | awk '{print $2}'` = "device" ] || \
-                [ `echo $line | awk '{print $2}'` = "recovery" ]); then
+                [ `echo $line | awk '{print $2}'` = "recovery" ] || \
+                [ `echo $line | awk '{print $2}'` = "sideload" ]); then
             id=$(echo $line | awk '{print $1}')
             # the problem is that adb reads from stdin by default, so you need /dev/null so that it doesn't
             # consume the rest of the loop. Read https://stackoverflow.com/a/13800476/4008886
