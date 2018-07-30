@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 1.51
+# Version: 1.52
 
 # Variables for color output
 green=`tput setaf 2`
@@ -46,7 +46,10 @@ elif [ "$1" == "generate" ]; then
             id=$(echo $line | awk '{print $1}')
             # the problem is that adb reads from stdin by default, so you need /dev/null so that it doesn't
             # consume the rest of the loop. Read https://stackoverflow.com/a/13800476/4008886
-            device=$(adb -s $id shell getprop ro.product.device </dev/null)
+            devicefull=$(adb -s $id shell getprop ro.product.device </dev/null)
+
+            # Remove any dashes in the name
+            device=${devicefull//-}
 
             # lowercase filename, remove spaces, remove linefeeds/newlines
             # Read https://stackoverflow.com/a/19345966/4008886
