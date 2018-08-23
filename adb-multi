@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 1.52
+# Version: 1.6
 
 # Variables for color output
 green=`tput setaf 2`
@@ -27,7 +27,11 @@ reset=`tput sgr0`
 # Device path to push to, using adb-$filename-push
 adbdestdir=/sdcard
 # PC path to save screenshots to, using adb-$filename-screenshot
-screendir=/media/Data/Pictures/Screenshots/adb
+if grep -q Microsoft /proc/version; then
+    screendir=/mnt/d/Pictures/Screenshots/adb
+else
+    screendir=/media/Data/Pictures/Screenshots/adb
+fi
 
 # Check for zero arguments and abort
 if [ $# -eq 0 ]; then
