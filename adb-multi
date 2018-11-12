@@ -14,7 +14,6 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# shellcheck disable=2030,2031
 # Version: 1.9
 
 # Variables for color output
