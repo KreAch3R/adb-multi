@@ -42,6 +42,7 @@ Current scripts:
       ```
   * **adb-$FILENAME-screenshot**: grabs a screenshot from the device using the `screencap` utility and saves it into the development's machine *$SCREENDIR* folder (script variable).
   * **adb-$FILENAME-activity**: finds out the current activity path shown on the device
+  * **adb-$FILENAME-install**: installs an apk to the device, and handles the infamous case of "-r" argument on its own
 
 ## Installation
 
