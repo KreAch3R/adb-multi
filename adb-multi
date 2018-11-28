@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 2.1
+# Version: 2.11
 
 # Variables for color output
 green=$(tput setaf 2)
@@ -71,6 +71,11 @@ elif [ "$1" == "generate" ]; then
             if [[ $REPLY =~ ^[Nn]$ ]]; then
                 echo "${yellow}Please name your "$device"!${reset}"
                 read -p 'New name: ' filename < /dev/tty
+            fi
+
+            # Check if install directory exists
+            if [ ! -d "$path" ]; then
+                mkdir -p $path
             fi
 
             echo "${yellow}Installing $filename...${reset}"
