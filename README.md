@@ -7,6 +7,7 @@ A simple ADB wrapper to manage your development needs for multiple devices.
  * Basic linux environment knowledge *(I don't know what you need ADB for if you don't have it)*
  * ADB correctly installed in *$PATH*
  * ***~/bin*** directory inside *$PATH*
+ * ***CUSTOM $PATH*** variable directory inside *$PATH* (check [#L32](https://github.com/KreAch3R/adb-multi/blob/2f652363422e41f1105c1ed102e091f833b40d85/adb-multi#L32))
  * multiple ADB enabled devices
 
 ## What it's for
@@ -32,7 +33,9 @@ The screenshot speaks for itself!
 
 ### Script generation
 
-If run with `generate` as the argument, the script will find your currently connected ADB devices, and create two scripts *per device* inside your *~/bin* directory (This may change in the future, if new functions are needed).
+If run with `generate` as the argument, the script will find your currently connected ADB devices, and create 5 scripts *per device* inside your **CUSTOM $PATH variable** directory. You can also specify the device names:
+
+<img src="screenshots/screenshot2.png?raw=true">
 
 Current scripts:
    * **adb-$FILENAME**: standard ADB wrapper, with current device info. Expect everything to work as it should (everything is piped through).   
@@ -46,8 +49,6 @@ Current scripts:
 
 ## Installation
 
-Find a way to place adb-multi inside your *$PATH*. My preferred method is cloning the repository inside *~/bin* and then adding **~/bin/adb-multi** to my *$PATH*, but you can improvise. As long as you can type ```adb-multi``` and the scripts answers, you're good.
-
-**NOTICE**: Regardless of how you're going to install **adb-multi**, the generated *adb-$FILENAME-** scripts **WILL** be placed under *~/bin*. This means that your *~/bin* should be inside your *$PATH* env variable already.
+Find a way to place adb-multi inside your *$PATH*. My preferred method is cloning the repository inside *~/bin* and then adding **~/bin/adb-multi** and **CUSTOM $PATH variable** to my *$PATH*, but you can improvise. As long as you can type ```adb-multi``` and the scripts answers, you're good.
 
 it also assumes you have already installed the adb binary.
