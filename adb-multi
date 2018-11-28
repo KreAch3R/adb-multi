@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 2.11
+# Version: 2.2
 
 # Variables for color output
 green=$(tput setaf 2)
@@ -70,7 +70,8 @@ elif [ "$1" == "generate" ]; then
             read -p "Do you want to use "$filename" for $device? (Y/n): " -r < /dev/tty
             if [[ $REPLY =~ ^[Nn]$ ]]; then
                 echo "${yellow}Please name your "$device"!${reset}"
-                read -p 'New name: ' filename < /dev/tty
+                read -p 'New name: ' input < /dev/tty
+                filename=adb-$input
             fi
 
             # Check if install directory exists
