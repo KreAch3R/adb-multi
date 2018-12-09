@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 2.2
+# Version: 2.3
 
 # Variables for color output
 green=$(tput setaf 2)
@@ -147,7 +147,8 @@ if [ "$1" ] && [ "$1" == "file-redirect" ]; then
     args="${*:1:$(($# - 1))}"
     # where to redirect to (filename passed as last argument)
     redirect="${*:$#}"
-    adb -s "$id" "$args" > "$redirect"
+    # We WANT $args to be expanded without quotes
+    adb -s "$id" $args > "$redirect"
 else
     # Pipe all the commands to adb
     adb -s "$id" "$@"
