@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.55
+Version=2.56
 
 # Variables DO NOT EDIT
 
@@ -54,7 +54,10 @@ fi
 USE_DEFAULT_FILENAMES=NO
 
 # Load config.cfg variables
-source $SCRIPTDIR/config.cfg
+if [ -f "$DIR/config.cfg" ]; then
+    echo "${yellow}Custom 'config.cfg' loaded!${reset}"
+    source $DIR/config.cfg
+fi
 
 
 # Start of the main adb-multi script
