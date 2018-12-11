@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.52
+Version=2.55
 
 # Variables DO NOT EDIT
 
@@ -95,6 +95,10 @@ elif [ "$1" == "generate" ]; then
 	            fi
 	        fi
 
+            # Check and set the custom command argument SCRIPTS_PATH variable
+            if [ "$2" ]; then
+                SCRIPTS_PATH="$2"
+            fi
             # Create install directory if necessary
             mkdir -p $SCRIPTS_PATH
 
