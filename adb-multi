@@ -146,7 +146,7 @@ EOT
             echo ""
         fi
     done
-    echo "${green}Your device adb-multi scripts have been installed in "$path". Enjoy!${reset}"
+    echo "${green}Your device adb-multi scripts have been installed in "$SCRIPTS_PATH". Enjoy!${reset}"
     exit 0
 elif [ "$1" == "info" ]; then
     # Show every configuration info
