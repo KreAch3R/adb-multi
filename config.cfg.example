@@ -1,5 +1,5 @@
 # Installation path of the generated scripts
-SCRIPTS_PATH="${ADB_MULTI_BIN:-$DIR/devices}"
+SCRIPTS_PATH="$DIR/devices"
 
 # Device path to push to, using adb-$filename-push
 ADBPUSHDIR=/sdcard
