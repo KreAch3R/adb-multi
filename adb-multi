@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.6
+Version=2.7
 
 # Variables DO NOT EDIT
 
@@ -101,6 +101,8 @@ elif [ "$1" == "generate" ]; then
             # Check and set the custom command argument SCRIPTS_PATH variable
             if [ "$2" ]; then
                 SCRIPTS_PATH="$2"
+                # Log the custom installation path in case the user forgets
+                echo $SCRIPTS_PATH > .custom_install_location.log
             fi
             # Create install directory if necessary
             mkdir -p $SCRIPTS_PATH
@@ -152,6 +154,9 @@ elif [ "$1" == "info" ]; then
     echo "${green}OS:${reset} $OS"
     echo "${green}PATH:${reset} $DIR"
     echo "${green}Scripts PATH:${reset} $SCRIPTS_PATH"
+    if [ -f "$DIR/.custom_install_location.log" ]; then
+        SCRIPTS_PATH=$(cat .custom_install_location.log)
+    fi
     echo "${green}Push PATH:${reset} $ADBPUSHDIR"
     echo "${green}Screenshots PATH:${reset} $SCREENSHOTDIR"
     echo "${green}Default filenames:${reset} $USE_DEFAULT_FILENAMES"
