@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.51
+Version=2.52
 
 # Variables DO NOT EDIT
 
@@ -95,10 +95,8 @@ elif [ "$1" == "generate" ]; then
 	            fi
 	        fi
 
-            # Check if install directory exists
-            if [ ! -d "$SCRIPTS_PATH" ]; then
-                mkdir -p $SCRIPTS_PATH
-            fi
+            # Create install directory if necessary
+            mkdir -p $SCRIPTS_PATH
 
             echo "${yellow}Installing $filename...${reset}"
             cat <<EOT > $SCRIPTS_PATH/"$filename"
