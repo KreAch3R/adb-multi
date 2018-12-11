@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-# Version: 2.3
+Version=2.4
 
 # Variables for color output
 green=$(tput setaf 2)
@@ -35,8 +35,10 @@ SCRIPTS_PATH="${ADB_MULTI_BIN:-$DIR/devices}"
 adbdestdir=/sdcard
 # PC path to save screenshots to, using adb-$filename-screenshot
 if grep -q Microsoft /proc/version; then
+    OS="Microsoft"
     screendir=/mnt/d/Pictures/Screenshots/adb
 else
+    OS="Linux"
     screendir=/media/Data/Pictures/Screenshots/adb
 fi
 
@@ -46,7 +48,7 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
-if [ "$1" ] && [ "$1" != "generate" ]; then
+if [ "$1" ] && [ "$1" != "generate" ] && [ "$1" != "info" ]; then
     # Device ID (passed as 1st argument)
     id="$1"
 elif [ "$1" == "generate" ]; then
@@ -121,6 +123,16 @@ EOT
         fi
     done
     echo "${green}Your device adb-multi scripts have been installed in "$path". Enjoy!${reset}"
+    exit 0
+elif [ "$1" == "info" ]; then
+    # Show every configuration info
+    echo "${green}Version:${reset} $Version"
+    echo "${green}OS:${reset} $OS"
+    echo "${green}PATH:${reset} $DIR"
+    echo "${green}Scripts PATH:${reset} $SCRIPTS_PATH"
+    echo "${green}Push PATH:${reset} $adbdestdir"
+    echo "${green}Screenshots PATH:${reset} $screendir"
+    echo "${green}Default filenames:${reset} $USE_DEFAULT_FILENAMES"
     exit 0
 fi
 
