@@ -144,10 +144,19 @@ EOT
             echo "${cyan}Setting scripts as executable...${reset}"
             chmod +x $(ls $SCRIPTS_PATH/*$filename*)
             echo ""
+            result=0
+        else
+            result=1
         fi
     done
-    echo "${green}Your device adb-multi scripts have been installed in "$SCRIPTS_PATH". Enjoy!${reset}"
-    exit 0
+    if [[ "$result" -ne "0" ]]; then
+        echo "${red}ADB server isn't working well or it didn't find any devices.${reset}"
+        echo "${red}Please try to run 'adb devices' manually and check for problems.${reset}"
+        exit 1
+    else
+        echo "${green}Your device adb-multi scripts have been installed in "$SCRIPTS_PATH". Enjoy!${reset}"
+        exit 0
+    fi
 elif [ "$1" == "info" ]; then
     # Show every configuration info
     echo "${green}Version:${reset} $Version"
