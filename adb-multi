@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.71
+Version=2.8
 
 # Variables DO NOT EDIT
 
@@ -72,7 +72,7 @@ if [ "$1" ] && [ "$1" != "generate" ] && [ "$1" != "info" ]; then
     # Device ID (passed as 1st argument)
     id="$1"
 elif [ "$1" == "generate" ]; then
-    adb devices | while read -r line; do
+    while read -r line; do
         if [ ! "$line" = "" ] && ([ "$(echo "$line" | awk '{print $2}')" = "device" ] || \
                 [ "$(echo "$line" | awk '{print $2}')" = "recovery" ] || \
                 [ "$(echo "$line" | awk '{print $2}')" = "sideload" ]); then
@@ -149,7 +149,9 @@ EOT
         else
             result=1
         fi
-    done
+    # Run "adb devices" here, to make it run inside the same shell
+    # Read: https://stackoverflow.com/a/16854326/4008886
+    done <<< $(adb devices)
     if [[ "$result" -ne "0" ]]; then
         echo "${red}ADB server isn't working well or it didn't find any devices.${reset}"
         echo "${red}Please try to run 'adb devices' manually and check for problems.${reset}"
