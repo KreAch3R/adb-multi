@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.5
+Version=2.51
 
 # Variables DO NOT EDIT
 
@@ -61,7 +61,7 @@ source $SCRIPTDIR/config.cfg
 
 # Check for zero arguments and abort
 if [ $# -eq 0 ]; then
-    echo "${red}You need to specify at least an adb device id or 'generate' to continue.${reset}"
+    echo "${red}You need to specify at least an adb device id or 'generate', 'info' to continue.${reset}"
     exit 1
 fi
 
