@@ -14,7 +14,9 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.41
+Version=2.5
+
+# Variables DO NOT EDIT
 
 # Variables for color output
 green=$(tput setaf 2)
@@ -23,12 +25,18 @@ red=$(tput setaf 1)
 yellow=$(tput setaf 3)
 reset=$(tput sgr0)
 
-# Variables DO NOT EDIT
 # Directory where adb-multi resides
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
+
 # Variables FREE TO EDIT
-# Folder to place scripts into:
+
+# BEST PRACTICE: Don't change the variables in here, create a config.cfg file
+# inside the root directory of the script (you can copy the config.cfg.example file)
+# Config.cfg is deliberately placed in .gitignore, so you can track upstream
+# while having changed variables.
+
+# Installation path of the generated scripts
 SCRIPTS_PATH="${ADB_MULTI_BIN:-$DIR/devices}"
 
 # Device path to push to, using adb-$filename-push
@@ -44,6 +52,12 @@ fi
 
 # Ask for filenames during script generation, or use default (YES/NO)
 USE_DEFAULT_FILENAMES=NO
+
+# Load config.cfg variables
+source $SCRIPTDIR/config.cfg
+
+
+# Start of the main adb-multi script
 
 # Check for zero arguments and abort
 if [ $# -eq 0 ]; then

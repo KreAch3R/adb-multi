@@ -1,0 +1,16 @@
+# Installation path of the generated scripts
+SCRIPTS_PATH="${ADB_MULTI_BIN:-$DIR/devices}"
+
+# Device path to push to, using adb-$filename-push
+ADBPUSHDIR=/sdcard
+# PC path to save screenshots to, using adb-$filename-screenshot
+if grep -q Microsoft /proc/version; then
+    OS="Microsoft"
+    SCREENSHOTDIR=/mnt/d/Pictures/Screenshots/adb
+else
+    OS="Linux"
+    SCREENSHOTDIR=/media/Data/Pictures/Screenshots/adb
+fi
+
+# Ask for filenames during script generation, or use default (YES/NO)
+USE_DEFAULT_FILENAMES=NO
