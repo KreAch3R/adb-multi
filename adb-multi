@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.7
+Version=2.71
 
 # Variables DO NOT EDIT
 
@@ -90,13 +90,13 @@ elif [ "$1" == "generate" ]; then
 
             # Read https://unix.stackexchange.com/a/445154/90681
             if [ "$USE_DEFAULT_FILENAMES" != "YES" ]; then
-	            read -p "Do you want to use "$filename" for $device? (Y/n): " -r < /dev/tty
-	            if [[ $REPLY =~ ^[Nn]$ ]]; then
-	                echo "${yellow}Please name your "$device"!${reset}"
-	                read -p 'New name: ' input < /dev/tty
-	                filename=adb-$input
-	            fi
+	        read -p "Do you want to use "$filename" for $device? (Y/n): " -r < /dev/tty
+	        if [[ $REPLY =~ ^[Nn]$ ]]; then
+	            echo "${yellow}Please name your "$device"!${reset}"
+	            read -p 'New name: ' input < /dev/tty
+	            filename=adb-$input
 	        fi
+	    fi
 
             # Check and set the custom command argument SCRIPTS_PATH variable
             if [ "$2" ]; then
