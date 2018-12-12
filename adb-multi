@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.81
+Version=2.82
 
 # Variables DO NOT EDIT
 
@@ -106,7 +106,7 @@ elif [ "$1" == "generate" ]; then
             # Create install directory if necessary
             mkdir -p $SCRIPTS_PATH
             # Log the custom installation path in case the user forgets
-            echo $SCRIPTS_PATH > .custom_install_location.log
+            echo $SCRIPTS_PATH > "$DIR/.custom_install_location.log"
 
             echo "${yellow}Installing $filename...${reset}"
             cat <<EOT > $SCRIPTS_PATH/"$filename"
