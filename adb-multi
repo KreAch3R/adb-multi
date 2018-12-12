@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.8
+Version=2.81
 
 # Variables DO NOT EDIT
 
@@ -102,11 +102,11 @@ elif [ "$1" == "generate" ]; then
             if [ "$2" ]; then
                 # Force-expand the 'tilde' character "~" if the argument is in double quotes
                 SCRIPTS_PATH=$(eval echo "$2")
-                # Log the custom installation path in case the user forgets
-                echo $SCRIPTS_PATH > .custom_install_location.log
             fi
             # Create install directory if necessary
             mkdir -p $SCRIPTS_PATH
+            # Log the custom installation path in case the user forgets
+            echo $SCRIPTS_PATH > .custom_install_location.log
 
             echo "${yellow}Installing $filename...${reset}"
             cat <<EOT > $SCRIPTS_PATH/"$filename"
