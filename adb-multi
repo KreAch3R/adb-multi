@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.82
+Version=2.85
 
 # Variables DO NOT EDIT
 
@@ -55,13 +55,11 @@ USE_DEFAULT_FILENAMES=NO
 
 # Load config.cfg variables
 if [ -f "$DIR/config.cfg" ]; then
-    echo "${yellow}Custom 'config.cfg' loaded!${reset}"
     # shellcheck disable=SC1090
     # This file doesn't exist for shellcheck to verify
     # But let's assume all's gonna be well here
     source "$DIR"/config.cfg
 fi
-
 
 # Start of the main adb-multi script
 
@@ -75,6 +73,10 @@ if [ "$1" ] && [ "$1" != "generate" ] && [ "$1" != "info" ]; then
     # Device ID (passed as 1st argument)
     id="$1"
 elif [ "$1" == "generate" ]; then
+    # Notify about using a custom config.cfg
+    if [ -f "$DIR/config.cfg" ]; then
+        echo "${yellow}Custom 'config.cfg' loaded!${reset}"
+    fi
     while read -r line; do
         if [ ! "$line" = "" ] && ([ "$(echo "$line" | awk '{print $2}')" = "device" ] || \
                 [ "$(echo "$line" | awk '{print $2}')" = "recovery" ] || \
@@ -164,6 +166,10 @@ EOT
         exit 0
     fi
 elif [ "$1" == "info" ]; then
+    # Notify about using a custom config.cfg
+    if [ -f "$DIR/config.cfg" ]; then
+        echo "${yellow}Custom 'config.cfg' loaded!${reset}"
+    fi
     # Show every configuration info
     echo "${green}Version:${reset} $Version"
     echo "${green}OS:${reset} $OS"
