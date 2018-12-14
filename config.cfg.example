@@ -12,5 +12,6 @@ else
     SCREENSHOTDIR=/media/Data/Pictures/Screenshots/adb
 fi
 
-# Ask for filenames during script generation, or use default (YES/NO)
-USE_DEFAULT_FILENAMES=NO
+# Use default filenames during generation (non-interactive mode),
+# or ask for optional filename input (default mode) (y/N)
+USE_DEFAULT_FILENAMES=n

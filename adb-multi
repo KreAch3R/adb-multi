@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.85
+Version=2.9
 
 # Variables DO NOT EDIT
 
@@ -50,8 +50,9 @@ else
     SCREENSHOTDIR=/media/Data/Pictures/Screenshots/adb
 fi
 
-# Ask for filenames during script generation, or use default (YES/NO)
-USE_DEFAULT_FILENAMES=NO
+# Use default filenames during generation (non-interactive mode),
+# or ask for optional filename input (default mode) (y/N)
+USE_DEFAULT_FILENAMES=n
 
 # Load config.cfg variables
 if [ -f "$DIR/config.cfg" ]; then
@@ -94,7 +95,7 @@ elif [ "$1" == "generate" ]; then
             filename="$(echo adb-"${device,,}" | sed 's/ //g' | tr -d '\r')"
 
             # Read https://unix.stackexchange.com/a/445154/90681
-            if [ "$USE_DEFAULT_FILENAMES" != "YES" ]; then
+            if [[ ! "$USE_DEFAULT_FILENAMES" =~ ^[Yy]$ ]]; then
 	        read -p "Do you want to use $filename for $device? (Y/n): " -r < /dev/tty
 	        if [[ $REPLY =~ ^[Nn]$ ]]; then
 	            echo "${yellow}Please name your $device!${reset}"
