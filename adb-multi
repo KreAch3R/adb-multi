@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=2.9
+Version=2.95
 
 # Variables DO NOT EDIT
 
@@ -189,9 +189,10 @@ fi
 shift 1
 
 # check if device is connected
-if [[ "$(adb -s "$id" shell echo "connection test" >/dev/null 2>&1)" -ne 0 ]]; then
-    echo  "${red}The selected device is NOT connected!${reset}"
-    exit 1
+if ! adb -s "$id" get-state >/dev/null 2>&1 ; then
+    echo "${red}The selected device is NOT connected!${reset}"
+    echo "${yellow}Please connect the device, adb is waiting...${reset}"
+    adb -s "$id" wait-for-device
 fi
 
 # Grab device info from getprop
