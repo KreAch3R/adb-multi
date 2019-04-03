@@ -15,3 +15,6 @@ fi
 # Use default filenames during generation (non-interactive mode),
 # or ask for optional filename input (default mode) (y/N)
 USE_DEFAULT_FILENAMES=n
+
+# Don't always print device name when connecting
+OUTPUT_DEVICE_NAME=y
