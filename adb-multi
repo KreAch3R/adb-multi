@@ -54,6 +54,9 @@ fi
 # or ask for optional filename input (default mode) (y/N)
 USE_DEFAULT_FILENAMES=n
 
+# Print device name when connecting
+OUTPUT_DEVICE_NAME=y
+
 # Load config.cfg variables
 if [ -f "$DIR/config.cfg" ]; then
     # shellcheck disable=SC1090
@@ -195,14 +198,16 @@ if ! adb -s "$id" get-state >/dev/null 2>&1 ; then
     adb -s "$id" wait-for-device
 fi
 
-# Grab device info from getprop
-model=$(adb -s "$id" shell getprop ro.product.model | tr -d '\r')
-manufacturer=$(adb -s "$id" shell getprop ro.product.manufacturer | tr -d '\r')
-# Strip duplicated manufacturer inside model
-shopt -s nocasematch
-strippedmodel="${model//${manufacturer}/}"
-shopt -u nocasematch
-echo "Connected to ${green}$manufacturer $strippedmodel!${reset}"
+if [[ "$OUTPUT_DEVICE_NAME" =~ ^[Yy]$ ]]; then
+    # Grab device info from getprop
+    model=$(adb -s "$id" shell getprop ro.product.model | tr -d '\r')
+    manufacturer=$(adb -s "$id" shell getprop ro.product.manufacturer | tr -d '\r')
+    # Strip duplicated manufacturer inside model
+    shopt -s nocasematch
+    strippedmodel="${model//${manufacturer}/}"
+    shopt -u nocasematch
+    echo "Connected to ${green}$manufacturer $strippedmodel!${reset}"
+fi
 
 if [ "$1" ] && [ "$1" == "file-redirect" ]; then
     # shift passed arguments one MORE place right (to bypass file-redirect)
