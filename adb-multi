@@ -192,6 +192,7 @@ elif [ "$1" == "info" ]; then
     echo "${green}Push PATH:${reset} $ADBPUSHDIR"
     echo "${green}Screenshots PATH:${reset} $SCREENSHOTDIR (${yellow}fallback:${reset} $SCREENSHOTDIRFALLBACK)"
     echo "${green}Default filenames:${reset} $USE_DEFAULT_FILENAMES"
+    echo "${green}Show device name:${reset} $OUTPUT_DEVICE_NAME"
     exit 0
 fi
 
