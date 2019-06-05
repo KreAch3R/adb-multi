@@ -14,7 +14,7 @@
 #     See the License for the specific language governing permissions and
 #     limitations under the License.
 
-Version=3.0
+Version=3.1
 
 # Variables DO NOT EDIT
 
@@ -87,7 +87,7 @@ elif [ "$1" == "generate" ]; then
         if [ ! "$line" = "" ] && ([ "$(echo "$line" | awk '{print $2}')" = "device" ] || \
                 [ "$(echo "$line" | awk '{print $2}')" = "recovery" ] || \
                 [ "$(echo "$line" | awk '{print $2}')" = "sideload" ]); then
-            product=$(echo "$line" | awk '{print $4}' | cut -d ':' -f 2)
+            product=$(echo "$line" | sed -r 's/.*product:([^ ]+).*/\1/')
 
             # lowercase filename, remove spaces, remove linefeeds/newlines
             # Read https://stackoverflow.com/a/19345966/4008886
@@ -198,7 +198,7 @@ while read -r line; do
         id=$(echo "$line" | awk '{print $1}')
         product=$(echo "$line" | awk '{print $4}' | cut -d ':' -f 2)
         if [ "$product" == "$device" ]; then
-            transport_id=$(echo "$line" | awk '{print $7}' | cut -d ':' -f 2)
+            transport_id=$(echo "$line" | sed -r 's/.*transport_id:([^ ]+).*/\1/')
             break
         fi
     fi
