@@ -94,7 +94,7 @@ elif [ "$1" == "generate" ]; then
             filename="$(echo adb-"${product,,}" | sed 's/ //g' | tr -d '\r')"
 
             # Read https://unix.stackexchange.com/a/445154/90681
-            if [[ "$USE_DEFAULT_FILENAMES" =~ "[Nn]" ]]; then
+            if [[ ! "$USE_DEFAULT_FILENAMES" =~ ^[Yy]$ ]]; then
 	        read -p "Do you want to use $filename for $device? (Y/n): " -r < /dev/tty
 	        if [[ $REPLY =~ ^[Nn]$ ]]; then
 	            echo "${yellow}Please name your $device!${reset}"
@@ -214,7 +214,7 @@ if ! adb -t "$transport_id" get-state >/dev/null 2>&1 ; then
     exit 1
 fi
 
-if [[ "$OUTPUT_DEVICE_NAME" =~ "[Nn]" ]]; then
+if [[ "$OUTPUT_DEVICE_NAME" =~ ^[Yy]$ ]]; then
     # Grab device info from getprop
     model=$(adb -t "$transport_id" shell getprop ro.product.model | tr -d '\r')
     manufacturer=$(adb -t "$transport_id" shell getprop ro.product.manufacturer | tr -d '\r')
