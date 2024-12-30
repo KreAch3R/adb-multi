@@ -2,6 +2,10 @@
 
 A simple ADB wrapper to manage your development needs for multiple devices.
 
+<a href="https://www.paypal.com/donate/?business=R9V8AAFPNV684&no_recurring=0&currency_code=EUR">
+<img src="https://raw.githubusercontent.com/stefan-niedermann/paypal-donate-button/master/paypal-donate-button.png" alt="Donate with PayPal" width="300">
+</a>
+
 ## Prerequisites
  * Common sense
  * Basic linux environment knowledge *(I don't know what you need ADB for if you don't have it)*
